@@ -26,7 +26,7 @@
 </section>
 <section class="ticker"><div>STYLE <b>✳</b> OBJECTS <b>✳</b> BEAUTY <b>✳</b> DISCOVERY <b>✳</b> STYLE <b>✳</b> OBJECTS <b>✳</b> BEAUTY <b>✳</b> DISCOVERY <b>✳</b></div></section>
 <section class="intro-section" id="story"><p class="eyebrow">WELCOME TO NIRVO MALL</p><h2>Not just a place to shop.<br><em>A place to feel inspired.</em></h2><p>Explore a digital destination where distinct worlds meet. Move through our departments, discover new perspectives and find pieces that feel unmistakably yours.</p></section>
-<section class="departments" id="departments">
+<section class="virtual-mall" id="virtualMall"><div class="mall-heading"><p class="eyebrow">THE NIRVO EXPERIENCE</p><h2>Step inside<br><em>your new world.</em></h2><p>Explore the architecture. Discover the destinations.</p><span class="drag-hint">↔ DRAG TO EXPLORE · SCROLL TO DISCOVER</span></div><div class="mall-stage"><canvas id="mallCanvas" aria-label="Interactive 3D view of the NIRVO Mall interior"></canvas><div class="mall-label label-fashion"><span>01</span> FASHION</div><div class="mall-label label-jewellery"><span>02</span> JEWELLERY</div><div class="mall-label label-beauty"><span>03</span> BEAUTY</div><div class="mall-controls">INTERACTIVE 3D · NIRVO MALL <span>✦</span></div></div></section><section class="departments" id="departments">
   <div class="section-head"><div><p class="eyebrow">EXPLORE OUR WORLDS</p><h2>Find your <em>space.</em></h2></div><span class="section-index">01 — 03</span></div>
   <div class="department-grid">
     <a class="department fashion" href="#edit"><div class="dept-img"></div><div class="dept-meta"><span>01 / PERSONAL STYLE</span><span>↗</span></div><h3>Fashion <i>—</i></h3><p>Everyday icons. Distinctive expression.</p></a>
@@ -41,5 +41,5 @@
 <div class="drawer-backdrop" id="drawerBackdrop"></div><aside class="drawer" id="drawer"><button class="close" id="closeDrawer">×</button><p class="eyebrow">YOUR SELECTION</p><h2>Shopping bag</h2><div class="bag-empty">Your bag is waiting for something special.</div><p class="drawer-note">Collections are being curated. Product purchasing will open soon.</p></aside>
 <div class="search-panel" id="searchPanel"><button class="close" id="closeSearch">×</button><p class="eyebrow">SEARCH NIRVO MALL</p><input id="searchInput" placeholder="What are you looking for?" autocomplete="off"><p class="search-hint">Try fashion, jewellery or skincare</p><div id="searchResults"></div></div>
 <div class="toast" id="toast" role="status"></div>
-<script src="/app.js"></script>
+<script type="module" src="/mall-3d.js"></script><script src="/app.js"></script>
 </body></html>
