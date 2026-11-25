@@ -80,11 +80,31 @@ export function addRetailFixtures(T,s,b,cy){
    tube(g,.34,.34,.025,softGlow,0,-1.45,0);
    const light=new T.PointLight(0xffd8ad,2.2,6);light.position.set(0,-1.5,0);g.add(light);
  }
- // Main retail islands and service counters, placed around a wide central promenade.
- counter(-10.1,-2.2,3.35);counter(10.1,-2.2,3.35);
- wallRack(-10.2,-7,1);wallRack(10.2,-7,-1);
- vitrine(-5.05,-2.1,1.95);vitrine(5.05,-2.1,1.95);
- island(-5.1,-6.2);island(5.1,-6.2);
+ // Five distinct boutique interiors: each occupies its own bay along the shared promenade.
+ const bayCenters=[-10,-5,0,5,10];
+ const bayMats=[
+  new T.MeshStandardMaterial({color:'#b9aa94',roughness:.78}),
+  new T.MeshStandardMaterial({color:'#332e29',metalness:.24,roughness:.38}),
+  new T.MeshStandardMaterial({color:'#c6aaa4',roughness:.68}),
+  new T.MeshStandardMaterial({color:'#39413f',metalness:.28,roughness:.34}),
+  new T.MeshStandardMaterial({color:'#76563f',roughness:.52})
+ ];
+ const pale=new T.MeshStandardMaterial({color:'#e1d7c8',roughness:.72});
+ const garment=new T.MeshStandardMaterial({color:'#8b7965',roughness:.9});
+ const bottleGlass=new T.MeshPhysicalMaterial({color:'#b7c7bf',roughness:.16,metalness:.08,transmission:.5,transparent:true,opacity:.88});
+ function bayFloor(x,w,mat){box(s,w,.035,9,mat,x,-.205,-7.1);box(s,w,.025,.06,brass,x,-.18,-11.55);box(s,w,.025,.06,brass,x,-.18,-2.65)}
+ function wallPanel(x,w,mat){box(s,w,4.2,.22,mat,x,2,-11.15);box(s,w+.12,.07,.28,brass,x,4.14,-11.12)}
+ function mannequin(x,z,scale=1){const g=new T.Group();g.position.set(x,0,z);s.add(g);tube(g,.22,.27,.12,brass,0,.08,0);tube(g,.12,.16,.95,garment,0,.65,0);tube(g,.07,.11,.5,garment,0,1.32,0);tube(g,.09,.09,.13,pale,0,1.65,0);for(let side of [-1,1]){box(g,.09,.75,.1,garment,side*.24,1.05,0);box(g,.11,.78,.12,garment,side*.1,-.28,0)}g.scale.setScalar(scale);return g}
+ // 01 Fashion — warm atelier, timber rails, garment forms and soft fitting-room light.
+ {const x=bayCenters[0];bayFloor(x,4.65,new T.MeshStandardMaterial({color:'#8d806e',roughness:.88}));wallPanel(x,4.35,new T.MeshStandardMaterial({color:'#786c5c',roughness:.82}));for(let side of [-1,1]){box(s,.12,3.5,.16,brass,x+side*1.88,1.8,-7.2);box(s,1.05,.09,.1,brass,x+side*1.35,3.42,-7.2)}box(s,3.3,.12,.72,pale,x,.62,-5.3);box(s,3.3,.045,.76,brass,x,.7,-5.3);box(s,2.8,.08,.16,brass,x,2.95,-7.1);for(let j=0;j<5;j++){let xx=x-1.15+j*.57;box(s,.035,.9,.035,garment,xx,2.35,-7.1);box(s,.24,.52,.08,[garment,pale,inner][j%3],xx,2.1,-7.1)}mannequin(x-1.25,-4.1,.9);mannequin(x+1.15,-4.1,.9);ceilingPendant(x, -5.2)}
+ // 02 Jewellery — dark velvet salon, glass vitrines, fine brass frames and focused points of light.
+ {const x=bayCenters[1];bayFloor(x,4.65,new T.MeshStandardMaterial({color:'#282521',roughness:.32}));wallPanel(x,4.35,new T.MeshStandardMaterial({color:'#292622',roughness:.48}));for(let j=0;j<3;j++){let xx=x-1.35+j*1.35;vitrine(xx,-6.1,1.05);let beam=new T.SpotLight(0xffe5bd,10,5,Math.PI/8,.65);beam.position.set(xx,3.8,-5.9);beam.target.position.set(xx,1.2,-6.1);s.add(beam,beam.target)}box(s,3.4,.18,1.0,brass,x,.35,-9.1);box(s,3.25,.65,.84,inner,x,.76,-9.1);box(s,3.4,.045,1.0,glass,x,1.12,-9.1)}
+ // 03 Beauty — pale stone apothecary with a long consultation counter and backlit product niches.
+ {const x=bayCenters[2];bayFloor(x,4.65,new T.MeshStandardMaterial({color:'#bcaea0',roughness:.62}));wallPanel(x,4.35,new T.MeshStandardMaterial({color:'#b79f96',roughness:.75}));box(s,3.7,.8,1.0,pale,x,.42,-5.2);box(s,3.8,.1,1.08,brass,x,.87,-5.2);for(let level=0;level<3;level++){box(s,3.5,.07,.5,pale,x,1.1+level*.85,-10.55);for(let j=0;j<6;j++){let xx=x-1.42+j*.57;let h=.28+(j%3)*.09;let bottle=new T.Mesh(new T.CylinderGeometry(.075,.09,h,20),j%2? bottleGlass:new T.MeshStandardMaterial({color:'#c5b28f',roughness:.28,metalness:.12}));bottle.position.set(xx,1.28+level*.85+h/2,-10.35);s.add(bottle);cy(s,.085,.085,.045,brass,xx,1.28+level*.85+h,-10.35)}}}
+ // 04 Watches — graphite horology gallery, framed watch wall and individual illuminated plinths.
+ {const x=bayCenters[3];bayFloor(x,4.65,new T.MeshStandardMaterial({color:'#333936',roughness:.38}));wallPanel(x,4.35,new T.MeshStandardMaterial({color:'#303735',metalness:.2,roughness:.38}));for(let j=0;j<3;j++){let xx=x-1.35+j*1.35;box(s,1.05,2.55,.16,darkMetal,xx,2.05,-10.85);box(s,.92,2.36,.045,glass,xx,2.05,-10.73);box(s,.72,.08,.55,brass,xx,1.0,-9.9);tube(s,.24,.24,.42,pale,xx,1.28,-9.9);let dial=new T.Mesh(new T.CylinderGeometry(.18,.18,.07,40),brass);dial.rotation.x=Math.PI/2;dial.position.set(xx,1.65,-10.55);s.add(dial);let beam=new T.SpotLight(0xffe7c9,7,4,Math.PI/9,.7);beam.position.set(xx,3.8,-9.8);beam.target.position.set(xx,1.5,-10.5);s.add(beam,beam.target)}}
+ // 05 Fragrance — intimate scent library with warm timber shelves, alcoves and bottle ledges.
+ {const x=bayCenters[4];bayFloor(x,4.65,new T.MeshStandardMaterial({color:'#6f5946',roughness:.72}));wallPanel(x,4.35,new T.MeshStandardMaterial({color:'#604833',roughness:.7}));for(let side of [-1,1]){box(s,.09,3.5,.18,brass,x+side*1.8,1.8,-10.85)}for(let level=0;level<4;level++){box(s,3.35,.09,.58,garment,x,.85+level*.82,-10.5);box(s,3.35,.025,.04,brass,x,.91+level*.82,-10.18);for(let j=0;j<5;j++){let xx=x-1.25+j*.62;let bottle=new T.Mesh(new T.BoxGeometry(.22,.32+(j%2)*.12,.2),new T.MeshPhysicalMaterial({color:j%2?'#b28a61':'#c8b99c',metalness:.12,roughness:.18,transmission:.22,transparent:true,opacity:.92}));bottle.position.set(xx,1.08+level*.82+(j%2)*.06,-10.45);s.add(bottle);box(s,.12,.09,.12,brass,xx,1.28+level*.82,-10.45)}}}
  // Rear wall merchandising bays with framed headers and repeated shelf modules.
  for(let x=-8;x<=8;x+=4){
    box(s,3.05,.12,.86,metal,x,2.08,-15);
