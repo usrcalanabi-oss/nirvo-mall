@@ -28,8 +28,8 @@ export function initLuxuryLayer({ THREE, scene, camera, renderer, onDepartment, 
         shader.fragmentShader = shader.fragmentShader.replace(
           '#include <color_fragment>',
           `#include <color_fragment>
-          float marbleWave = sin((vUv.x * 13.0 + sin(vUv.y * 9.0) * 0.7) * 6.2831);
-          float marbleVein = smoothstep(0.965, 1.0, abs(marbleWave + sin(vUv.y * 41.0) * 0.035));
+          float marbleWave = sin((gl_FragCoord.x * 0.0013 + sin(gl_FragCoord.y * 0.0009) * 0.7) * 6.2831);
+          float marbleVein = smoothstep(0.965, 1.0, abs(marbleWave + sin(gl_FragCoord.y * 0.0041) * 0.035));
           diffuseColor.rgb = mix(diffuseColor.rgb, diffuseColor.rgb * 1.22 + vec3(0.018,0.025,0.055), marbleVein * 0.22);`
         );
       };
