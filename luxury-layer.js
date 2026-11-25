@@ -1,4 +1,4 @@
-export function initLuxuryLayer({ THREE, scene, camera, renderer, onDepartment, onHome, onBag }) {
+export function initLuxuryLayer({ THREE, scene, camera, renderer, onDepartment, onHome, onGallery, onBag }) {
   const $ = (id) => document.getElementById(id);
   const saved = (key, fallback) => { try { return JSON.parse(localStorage.getItem(key) || JSON.stringify(fallback)); } catch { return fallback; } };
   let audio = null, soundOn = false, tilt = { x: 0, y: 0 }, tiltEnabled = false;
@@ -75,13 +75,13 @@ export function initLuxuryLayer({ THREE, scene, camera, renderer, onDepartment, 
   }
 
   const dock = document.createElement('nav'); dock.className = 'nirvo-dock'; dock.setAttribute('aria-label', 'Quick destinations');
-  dock.innerHTML = '<button data-wing="atrium">ATRIUM</button><button data-wing="fashion">FASHION</button><button data-wing="jewellery">JEWELLERY</button><button data-wing="beauty">BEAUTY</button><button data-wing="concierge">CONCIERGE</button>';
+  dock.innerHTML = '<button data-wing="atrium">ATRIUM</button><button data-wing="skybridge">SKYBRIDGE</button><button data-wing="fashion">FASHION</button><button data-wing="jewellery">JEWELLERY</button><button data-wing="beauty">BEAUTY</button><button data-wing="concierge">CONCIERGE</button>';
   document.getElementById('world').append(dock);
   const soundBtn = document.createElement('button'); soundBtn.className = 'nirvo-sound'; soundBtn.textContent = 'SOUND OFF'; soundBtn.setAttribute('aria-label','Toggle ambient sound'); document.getElementById('world').append(soundBtn);
   soundBtn.addEventListener('click', () => soundOn ? stopSound() : startSound());
   dock.querySelectorAll('[data-wing]').forEach(btn => btn.addEventListener('click', () => {
     const wing = btn.dataset.wing; store.wing = wing; localStorage.setItem('nirvoPreferredWing', JSON.stringify(wing));
-    if (wing === 'atrium') onHome(); else if (wing === 'concierge') $('menuPanel')?.classList.add('open'); else onDepartment(['fashion','jewellery','beauty'].indexOf(wing));
+    if (wing === 'atrium') onHome(); else if (wing === 'skybridge') onGallery?.(); else if (wing === 'concierge') $('menuPanel')?.classList.add('open'); else onDepartment(['fashion','jewellery','beauty'].indexOf(wing));
     dock.querySelectorAll('button').forEach(b => b.classList.toggle('active', b === btn)); chime(wing === 'jewellery' ? 1046 : wing === 'beauty' ? 784 : 880);
   }));
 
@@ -114,7 +114,7 @@ export function initLuxuryLayer({ THREE, scene, camera, renderer, onDepartment, 
 
   // URL hash carries a shareable, non-sensitive lookbook selection.
   window.addEventListener('hashchange', () => {
-    try { const data = JSON.parse(decodeURIComponent(location.hash.slice(5))); if (data.wing) { store.wing=data.wing; if (data.wing!=='atrium' && ['fashion','jewellery','beauty'].includes(data.wing)) onDepartment(['fashion','jewellery','beauty'].indexOf(data.wing)); } } catch {}
+    try { const data = JSON.parse(decodeURIComponent(location.hash.slice(5))); if (data.wing) { store.wing=data.wing; if (data.wing==='skybridge') onGallery?.(); else if (data.wing!=='atrium' && ['fashion','jewellery','beauty'].includes(data.wing)) onDepartment(['fashion','jewellery','beauty'].indexOf(data.wing)); } } catch {}
   });
   const share = document.createElement('button'); share.className='nirvo-share'; share.textContent='SHARE LOOKBOOK ↗'; document.getElementById('world').append(share);
   share.addEventListener('click', async () => {
@@ -148,6 +148,6 @@ export function initLuxuryLayer({ THREE, scene, camera, renderer, onDepartment, 
   };
   const preferred = store.wing;
   dock.querySelectorAll('button').forEach(b => b.classList.toggle('active', b.dataset.wing === preferred));
-  if (location.hash.startsWith('#bag=')) { try { const data=JSON.parse(decodeURIComponent(location.hash.slice(5))); if(data.wing && ['fashion','jewellery','beauty'].includes(data.wing)) onDepartment(['fashion','jewellery','beauty'].indexOf(data.wing)); } catch {} }
+  if (location.hash.startsWith('#bag=')) { try { const data=JSON.parse(decodeURIComponent(location.hash.slice(5))); if(data.wing==='skybridge') onGallery?.(); else if(data.wing && ['fashion','jewellery','beauty'].includes(data.wing)) onDepartment(['fashion','jewellery','beauty'].indexOf(data.wing)); } catch {} }
   return { chime, toast };
 }
