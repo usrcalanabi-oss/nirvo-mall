@@ -1,12 +1,12 @@
 export function addRetailFixtures(T,s,b,cy){
- const metal=new T.MeshStandardMaterial({color:'#26385f',metalness:.86,roughness:.2});
- const darkMetal=new T.MeshStandardMaterial({color:'#101a31',metalness:.72,roughness:.27});
- const stone=new T.MeshStandardMaterial({color:'#cbd3e4',metalness:.16,roughness:.31});
- const inner=new T.MeshStandardMaterial({color:'#17243e',metalness:.42,roughness:.3});
- const glass=new T.MeshPhysicalMaterial({color:'#b9efff',metalness:.04,roughness:.055,transparent:true,opacity:.16,transmission:.72,thickness:.18,ior:1.45,depthWrite:false});
- const cyan=new T.MeshBasicMaterial({color:'#67e7f5'});
- const softGlow=new T.MeshStandardMaterial({color:'#67e7f5',emissive:'#2acbe4',emissiveIntensity:1.6,roughness:.22});
- const brass=new T.MeshStandardMaterial({color:'#8c9bc0',metalness:.9,roughness:.19});
+ const metal=new T.MeshStandardMaterial({color:'#75644e',metalness:.78,roughness:.28});
+ const darkMetal=new T.MeshStandardMaterial({color:'#282725',metalness:.35,roughness:.48});
+ const stone=new T.MeshStandardMaterial({color:'#d2c9ba',metalness:.04,roughness:.55});
+ const inner=new T.MeshStandardMaterial({color:'#393631',metalness:.12,roughness:.52});
+ const glass=new T.MeshPhysicalMaterial({color:'#c6c8c4',metalness:.02,roughness:.09,transparent:true,opacity:.12,transmission:.82,thickness:.22,ior:1.45,depthWrite:false});
+ const cyan=new T.MeshStandardMaterial({color:'#b69b72',roughness:.35,metalness:.55});
+ const softGlow=new T.MeshStandardMaterial({color:'#d9c7a7',emissive:'#b9874b',emissiveIntensity:.22,roughness:.38});
+ const brass=new T.MeshStandardMaterial({color:'#a68a5e',metalness:.88,roughness:.24});
  function box(p,w,h,d,m,x,y,z,bevel=0){const o=new T.Mesh(new T.BoxGeometry(w,h,d),m);o.position.set(x,y,z);o.castShadow=true;o.receiveShadow=true;p.add(o);return o}
  function tube(p,a,c,h,m,x,y,z){const o=new T.Mesh(new T.CylinderGeometry(a,c,h,32),m);o.position.set(x,y,z);o.castShadow=true;p.add(o);return o}
  function strip(p,w,h,d,m,x,y,z){return box(p,w,h,d,m,x,y,z)}
@@ -71,14 +71,14 @@ export function addRetailFixtures(T,s,b,cy){
    tube(g,.61,.61,.035,inner,0,.9,0);
    for(let a=0;a<4;a++){const ang=a*Math.PI/2;let x1=Math.cos(ang)*.78,z1=Math.sin(ang)*.78;box(g,.035,.48,.035,brass,x1,.48,z1)}
    // floating halo ring above the product platform
-   const ring=new T.Mesh(new T.TorusGeometry(.52,.018,10,72),cyan);ring.rotation.x=Math.PI/2;ring.position.y=1.18;g.add(ring);
+   const ring=new T.Mesh(new T.TorusGeometry(.52,.009,8,72),brass);ring.rotation.x=Math.PI/2;ring.position.y=1.18;g.add(ring);
  }
  function ceilingPendant(x,z){
    const g=new T.Group();g.position.set(x,7.65,z);s.add(g);
    tube(g,.012,.012,1.25,metal,0,-.62,0);
    tube(g,.17,.42,.18,metal,0,-1.34,0);
    tube(g,.34,.34,.025,softGlow,0,-1.45,0);
-   const light=new T.PointLight(0x67e7f5,5.5,7);light.position.set(0,-1.5,0);g.add(light);
+   const light=new T.PointLight(0xffd8ad,2.2,6);light.position.set(0,-1.5,0);g.add(light);
  }
  // Main retail islands and service counters, placed around a wide central promenade.
  counter(-10.1,-2.2,3.35);counter(10.1,-2.2,3.35);
