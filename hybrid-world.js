@@ -83,9 +83,6 @@ export function addHybridWorld(T, scene) {
 
   // A few warm pools of light make the marble floor and product displays read naturally.
   for(const x of [-9,-3,3,9]) for(const z of [-13,-5,3]) addPoint(x,6.8,z,1.35,9);
-  const ceilingGlow = new T.RectAreaLight(0xffdfbd,2.2,18,5);
-  ceilingGlow.position.set(0,7.3,-4); ceilingGlow.rotation.x=-Math.PI/2; scene.add(ceilingGlow);
-
   function update() {}
   return { update };
 }
