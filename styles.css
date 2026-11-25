@@ -2,3 +2,20 @@
 
 /* Functional shopping trolley and checkout */
 .cart-items{display:flex;flex-direction:column;gap:0;max-height:24vh;overflow:auto;margin:14px 0}.empty-cart{font-size:12px;line-height:1.8;color:var(--muted)}.cart-row{display:grid;grid-template-columns:1fr auto;gap:8px;padding:12px 0;border-bottom:1px solid #ffffff20}.cart-row strong{font:16px 'Playfair Display';font-weight:400}.cart-row small{display:block;color:var(--gold);font-size:8px;letter-spacing:1px;margin-top:5px}.cart-controls{display:flex;align-items:center;gap:8px}.cart-controls button{color:var(--gold-light);font-size:16px;padding:4px}.cart-controls span{font-size:11px}.cart-total{display:flex;justify-content:space-between;border-top:1px solid #9c7a4944;padding:10px 0;color:var(--gold);font-size:9px;letter-spacing:2px}.checkout-form{display:flex;flex-direction:column;gap:9px;margin-top:12px}.checkout-form label{display:flex;flex-direction:column;gap:5px;color:#c9bda8;font-size:10px;letter-spacing:1px}.checkout-form input,.checkout-form textarea{width:100%;border:1px solid #806b484d;background:#ffffff08;color:#f0e9dc;padding:9px;font:12px 'DM Sans';outline:none;border-radius:0}.checkout-form textarea{min-height:48px;resize:vertical}.checkout-form input:focus,.checkout-form textarea:focus{border-color:var(--gold)}.complete-purchase,.add-to-cart{padding:14px 16px;background:var(--gold);color:#100d08;font-size:9px;letter-spacing:1.5px;font-weight:600;text-align:center}.add-to-cart{width:100%;margin-top:18px}.product-focus .product-price{color:var(--gold-light);font-size:12px;letter-spacing:1px;margin-top:15px}.checkout-form small{font-size:9px;line-height:1.6;color:#a99b83}@media(max-width:700px){.cart-items{max-height:16vh}.checkout-form{gap:7px}.checkout-form input,.checkout-form textarea{padding:8px}.bag-panel{overflow-y:auto}}
+
+/* NIRVO identity refresh */
+:root{--gold:#5148e8;--gold-light:#8fefff;--ink:#080d1d;--muted:#aab8d7}
+html,body{background:#080d1d;color:#f4f7ff}.world{background:radial-gradient(ellipse at 50% 46%,#17264a 0%,#0a1024 58%,#070b18 100%)}
+.topbar{background:linear-gradient(180deg,#080d1de8,transparent);border-bottom-color:#91aaff22}
+.brand{flex-direction:row;align-items:center;gap:12px;font:600 18px 'Space Grotesk','DM Sans',sans-serif;letter-spacing:2px}.brand img{width:34px;height:34px;border-radius:9px}.brand span{display:flex;flex-direction:column;gap:2px}.brand small{font:7px 'DM Sans';letter-spacing:4px;color:#67e7f5}
+.top-actions button{color:#e7efff}.top-actions b{border-color:#5148e8;color:#8fefff}
+.scene-title p,.eyebrow{color:#67e7f5}.scene-title h1 em,.side-panel h2 em{color:#8fefff}
+.scene-title>span,.scene-caption,.explore-hint,.bottom-left,.bottom-right{color:#b8c9ed}.caption-line,.bottom-divider{background:#67e7f5}
+.zone-nav button i{color:#67e7f5}.zone-nav button:before{background:#5148e8}.zone-nav button:hover,.zone-nav button.active{color:#8fefff}.zone-nav button.active:before,.zone-nav button:hover:before{background:#67e7f5}
+.side-panel,.product-focus,.bag-panel{background:linear-gradient(135deg,#101b38f5,#080d1df8);border-color:#5148e866}.panel-close{color:#8fefff}.panel-rule{background:#344a7b}
+.panel-products button span,.back-world,.bag-panel small,.cart-row small{color:#67e7f5}.product-actions button{border-color:#5148e8;color:#8fefff}
+.cart-total{border-color:#5148e866;color:#8fefff}.checkout-form input,.checkout-form textarea{border-color:#5269a455}.checkout-form input:focus,.checkout-form textarea:focus{border-color:#67e7f5}
+.complete-purchase,.add-to-cart{background:linear-gradient(110deg,#5148e8,#078db4);color:white}.product-focus .product-price{color:#8fefff}
+.boot{background:#080d1d}.boot-logo{color:#8fefff}.boot p{color:#67e7f5}.boot-line{background:#27365d}.boot-line i{background:linear-gradient(90deg,#5148e8,#67e7f5)}
+.fullscreen-btn{display:flex;align-items:center;gap:7px;color:#8fefff!important}.fullscreen-btn span{font-size:8px;letter-spacing:1.5px}
+@media(max-width:700px){.brand{font-size:16px}.brand img{width:30px;height:30px}.fullscreen-btn span{display:none}}
