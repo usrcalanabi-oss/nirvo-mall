@@ -14,7 +14,7 @@ export function mountProductCatalog({ data, onSelect }) {
   .catalog-meta{padding:12px}.catalog-meta small{display:block;color:#bda77f;font-size:8px;letter-spacing:1.4px;margin-bottom:7px}
   .catalog-meta strong{display:block;font:16px 'Playfair Display',serif;line-height:1.2}.catalog-meta span{display:block;color:#aaa59d;font-size:9px;margin-top:8px;letter-spacing:.6px}
   .catalog-open{display:block;width:100%;margin-top:12px;padding:12px;background:#b9a17b;color:#171513;border:0;font-size:9px;letter-spacing:1.5px}
-  .catalog-empty{color:#aaa;padding:30px 0}.catalog-card:active{transform:scale(.985)}
+  .catalog-empty{color:#aaa;padding:30px 0}.catalog-card:active{transform:scale(.985)}.browse-all-products{width:100%;margin:12px 0 18px;padding:14px;border:1px solid #b69b70;background:#b69b70;color:#171513;font-size:9px;letter-spacing:1.7px}.browse-all-products:active{opacity:.82}
   @media(max-width:850px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-overlay{padding:16px}.catalog-art{height:130px}}
   @media(max-width:390px){.catalog-grid{gap:8px}.catalog-meta{padding:9px}.catalog-meta strong{font-size:14px}}
   `;
