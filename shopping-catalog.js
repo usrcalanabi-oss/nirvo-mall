@@ -13,7 +13,7 @@ export function mountProductCatalog({ data, onSelect }) {
   .catalog-art:after{content:'';position:absolute;inset:12% 18%;border:1px solid #c8b18b33}.catalog-symbol{font:clamp(36px,5vw,58px) 'Playfair Display',serif;color:#d4bd98;text-shadow:0 8px 25px #000}
   .catalog-meta{padding:12px}.catalog-meta small{display:block;color:#bda77f;font-size:8px;letter-spacing:1.4px;margin-bottom:7px}
   .catalog-meta strong{display:block;font:16px 'Playfair Display',serif;line-height:1.2}.catalog-meta span{display:block;color:#aaa59d;font-size:9px;margin-top:8px;letter-spacing:.6px}
-  .catalog-open{display:block;width:100%;margin-top:12px;padding:12px;background:#b9a17b;color:#171513;border:0;font-size:9px;letter-spacing:1.5px}
+  .catalog-open{display:block;width:100%;margin-top:12px;padding:12px;background:#b9a17b;color:#171513;border:0;font-size:9px;letter-spacing:1.5px}.catalog-card-actions{display:flex;gap:6px;margin-top:8px}.catalog-card-actions button{flex:1;padding:9px 5px;border:1px solid #647da7;color:#dffbff;font-size:8px;letter-spacing:.7px}
   .catalog-empty{color:#aaa;padding:30px 0}.catalog-card:active{transform:scale(.985)}.browse-all-products{width:100%;margin:12px 0 18px;padding:14px;border:1px solid #b69b70;background:#b69b70;color:#171513;font-size:9px;letter-spacing:1.7px}.browse-all-products:active{opacity:.82}
   @media(max-width:850px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-overlay{padding:16px}.catalog-art{height:130px}}
   @media(max-width:390px){.catalog-grid{gap:8px}.catalog-meta{padding:9px}.catalog-meta strong{font-size:14px}}@media(max-width:700px){.top-actions #allProductsBtn{display:none}}
@@ -29,7 +29,7 @@ export function mountProductCatalog({ data, onSelect }) {
     data.forEach((d,z)=>d[3].forEach((name,i)=>{if(selected!=='ALL'&&selected!==d[1].toUpperCase())return;if(q&&!(`${name} ${d[1]} ${d[2]}`.toLowerCase().includes(q)))return;total++;
       const card=document.createElement('button');card.type='button';card.className='catalog-card';
       card.innerHTML='<div class="catalog-art"><div class="catalog-symbol">'+symbols[z]+'</div></div><div class="catalog-meta"><small>'+d[1].toUpperCase()+' · OBJECT 0'+(i+1)+'</small><strong>'+name+'</strong><span>PRICE ON ENQUIRY</span><span class="catalog-open">VIEW DETAILS ↗</span></div>';
-      card.addEventListener('click',()=>{root.classList.remove('open');onSelect(z,i)});grid.appendChild(card);
+      card.addEventListener('click',()=>{root.classList.remove('open');onSelect(z,i)});const actions=document.createElement('div');actions.className='catalog-card-actions';actions.innerHTML='<button type="button">♡ SAVE</button><button type="button">NOTIFY ME</button>';actions.children[0].onclick=e=>{e.stopPropagation();window.dispatchEvent(new CustomEvent('nirvo:wishlist',{detail:{key:z+'-'+i,name,category:d[1]}}));e.currentTarget.textContent='SAVED ✓'};actions.children[1].onclick=e=>{e.stopPropagation();window.dispatchEvent(new CustomEvent('nirvo:notify',{detail:{name,category:d[1]}}))};card.querySelector('.catalog-meta').appendChild(actions);grid.appendChild(card);
     }));count.textContent=total+' PRODUCTS AVAILABLE';empty.hidden=total!==0;
   }
   filters.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{selected=b.dataset.filter;filters.querySelectorAll('button').forEach(x=>x.classList.toggle('active',x===b));render()}));
