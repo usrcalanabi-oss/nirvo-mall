@@ -17,7 +17,7 @@ export function initWalkControls({ THREE, camera, canvas, onZone = () => {} }) {
   hud.innerHTML='<div class="walk-status">WALK MODE · EXPLORE THE MALL</div><div class="walk-joystick"><div class="walk-stick"></div></div><div class="walk-look" aria-label="Drag to look around"></div><div class="walk-tip">WASD / ARROWS TO WALK · DRAG TO LOOK</div>';
   document.getElementById('world').appendChild(hud);
   const joy=hud.querySelector('.walk-joystick'),stick=hud.querySelector('.walk-stick'),lookArea=hud.querySelector('.walk-look');
-  const state={enabled:false,x:0,z:4.2,yaw:0,pitch:0,moveX:0,moveY:0,keys:new Set(),lookPointer:null,lastX:0,lastY:0,zone:-1};
+  const state={enabled:false,paused:false,x:0,z:4.2,yaw:0,pitch:0,moveX:0,moveY:0,keys:new Set(),lookPointer:null,lastX:0,lastY:0,zone:-1};
   const centers=[-10,-5,0,5,10];
   const setStick=(x,y)=>{const max=34,len=Math.hypot(x,y)||1,k=Math.min(1,max/len);stick.style.transform='translate('+x*k+'px,'+y*k+'px)'};
   function joyStart(e){e.preventDefault();joy.setPointerCapture?.(e.pointerId);joyMove(e)}
@@ -34,8 +34,8 @@ export function initWalkControls({ THREE, camera, canvas, onZone = () => {} }) {
   window.addEventListener('pointermove',e=>{if(state.lookPointer!=='mouse'||!state.enabled)return;const dx=e.clientX-state.lastX,dy=e.clientY-state.lastY;state.lastX=e.clientX;state.lastY=e.clientY;state.yaw-=dx*.004;state.pitch=Math.max(-.72,Math.min(.58,state.pitch-dy*.003))});
   window.addEventListener('pointerup',()=>{if(state.lookPointer==='mouse')state.lookPointer=null});
   function enable(){state.enabled=true;state.x=0;state.z=4.2;state.yaw=0;state.pitch=-.04;state.zone=-1;hud.classList.add('active');hud.querySelector('.walk-status').textContent='WALK MODE · GRAND ATRIUM';}
-  function disable(){state.enabled=false;state.keys.clear();state.moveX=state.moveY=0;hud.classList.remove('active')}
-  function travelTo(i){if(i<0||i>4)return;state.x=centers[i];state.z=-1.2;state.yaw=0;state.pitch=-.04}
+  function disable(){state.enabled=false;state.paused=false;state.keys.clear();state.moveX=state.moveY=0;hud.classList.remove('active')}\n  function pause(){if(!state.enabled)return;state.enabled=false;state.paused=true;state.keys.clear();state.moveX=state.moveY=0;hud.classList.remove('active')}\n  function resume(){if(!state.paused)return;state.paused=false;state.enabled=true;hud.classList.add('active')}
+  function travelTo(i){if(i<0||i>4)return;state.x=centers[i];state.z=-1.2;state.yaw=0;state.pitch=-.04}\n  function returnToAtrium(){state.x=0;state.z=4.2;state.yaw=0;state.pitch=-.04;state.zone=-1;}
   function update(dt){
     if(!state.enabled)return;
     const k=state.keys,forward=(k.has('KeyW')||k.has('ArrowUp')?1:0)-(k.has('KeyS')||k.has('ArrowDown')?1:0)+state.moveY;
@@ -55,5 +55,5 @@ export function initWalkControls({ THREE, camera, canvas, onZone = () => {} }) {
     let zone=-1;for(let i=0;i<centers.length;i++)if(Math.abs(state.x-centers[i])<2.5&&state.z<-2.2&&state.z>-17.8){zone=i;break}
     if(zone!==state.zone){state.zone=zone;if(zone>=0){hud.querySelector('.walk-status').textContent='NOW EXPLORING · '+['FASHION ATELIER','JEWELLERY SALON','BEAUTY HOUSE','WATCH GALLERY','SCENT LIBRARY'][zone]}else hud.querySelector('.walk-status').textContent='WALK MODE · GRAND ATRIUM';onZone(zone)}
   }
-  return {enable,disable,update,travelTo,get enabled(){return state.enabled}};
+  return {enable,disable,pause,resume,update,travelTo,returnToAtrium,get enabled(){return state.enabled},get paused(){return state.paused}};
 }
