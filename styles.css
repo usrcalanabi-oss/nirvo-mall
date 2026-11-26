@@ -22,3 +22,68 @@ html,body{background:#080d1d;color:#f4f7ff}.world{background:radial-gradient(ell
 
 /* Motion and rendering polish */
 html{-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}.world,#mallCanvas{backface-visibility:hidden;transform:translateZ(0)}.side-panel,.product-focus,.bag-panel,.zone-nav button,.top-actions button{will-change:transform,opacity}.top-actions button,.zone-nav button,.product-actions button,.complete-purchase,.add-to-cart{transition:color .22s ease,background .22s ease,border-color .22s ease,transform .22s ease,opacity .22s ease}.complete-purchase:hover,.add-to-cart:hover{filter:brightness(1.12);transform:translateY(-1px)}.panel-close:hover{transform:rotate(90deg)}@media(max-width:700px){.grain{opacity:.07}.topbar{padding-top:env(safe-area-inset-top)}.side-panel,.product-focus,.bag-panel{padding-bottom:calc(25px + env(safe-area-inset-bottom))}}@media(prefers-reduced-motion:reduce){.side-panel,.product-focus,.bag-panel,.zone-nav button,.top-actions button{will-change:auto}}
+
+/* NIRVO Mall mobile and hero refinement */
+.scene-title{isolation:isolate;padding:22px 34px 26px 0}
+.scene-title:before{content:"";position:absolute;z-index:-1;inset:-52px -105px -48px -42px;background:radial-gradient(ellipse at 42% 48%,rgba(8,13,29,.96) 0%,rgba(8,13,29,.82) 42%,rgba(8,13,29,.32) 72%,transparent 100%);filter:blur(5px);pointer-events:none}
+.scene-title p,.scene-title>span,.scene-caption{color:#d1e0ff;text-shadow:0 2px 12px #050918}
+.zone-nav button{padding:10px 14px 10px 0;border-radius:3px;text-shadow:0 2px 12px #050918}
+.zone-nav button:hover,.zone-nav button.active{filter:drop-shadow(0 0 9px #67e7f566)}
+.explore-hint{color:#e1eaff;text-shadow:0 2px 10px #050918}
+.menu-panel{position:absolute;z-index:18;right:0;top:0;height:100%;width:min(390px,92vw);padding:16vh 42px 40px;background:linear-gradient(135deg,#101b38f5,#080d1dfb);border-left:1px solid #5148e866;backdrop-filter:blur(22px);transform:translateX(105%);transition:transform .7s cubic-bezier(.2,.8,.2,1);box-shadow:-30px 0 100px #0008}
+.menu-panel.open{transform:translateX(0)}.menu-panel h2{font:44px/1.08 'Playfair Display';font-weight:400;margin:18px 0 30px}.menu-panel h2 em{color:#8fefff}
+.menu-panel>button:not(.panel-close){display:block;width:100%;text-align:left;padding:17px 0;border-bottom:1px solid #ffffff20;font:12px 'DM Sans';letter-spacing:2px;color:#e8efff}
+.menu-panel>p:not(.eyebrow){font-size:12px;line-height:1.8;color:#b8c9ed}.menu-panel a{display:inline-block;margin-top:24px;color:#67e7f5;font-size:9px;letter-spacing:1.5px}.menu-panel small{display:block;margin-top:14px;color:#9eafd0;font-size:9px;line-height:1.7}.menu-divider{height:1px;background:#5148e866;margin:30px 0 24px}
+.top-actions button:hover{color:#8fefff;filter:drop-shadow(0 0 8px #67e7f566)}
+@media(max-width:700px){.scene-title{left:5%;top:19%;padding:14px 20px 18px 0}.scene-title:before{inset:-28px -45px -32px -18px;background:radial-gradient(ellipse at 42% 45%,rgba(8,13,29,.97) 0%,rgba(8,13,29,.86) 55%,rgba(8,13,29,.2) 100%)}.scene-caption{bottom:36%;left:6%;text-shadow:0 2px 10px #050918}.explore-hint{display:none!important}.mobile-help{display:block}.top-actions{gap:11px}.top-actions button{font-size:7px;letter-spacing:1px}.top-actions button span{font-size:7px;letter-spacing:1px}.menu-panel{width:100%;height:78%;top:auto;bottom:0;padding:60px 28px 30px;border-left:0;border-top:1px solid #5148e866;transform:translateY(105%);overflow:auto}.menu-panel.open{transform:translateY(0)}.menu-panel h2{font-size:36px;margin:12px 0 20px}}
+
+
+/* Zero-backend flagship interaction layer */
+.nirvo-dock{position:absolute;z-index:8;left:50%;bottom:24px;transform:translateX(-50%);display:flex;align-items:center;gap:5px;padding:7px;border:1px solid #67e7f544;border-radius:999px;background:#080d1ddd;backdrop-filter:blur(18px);box-shadow:0 12px 45px #0008}
+.nirvo-dock button,.nirvo-sound,.nirvo-share,.nirvo-tilt{padding:11px 15px;border-radius:999px;color:#cbd9f6;font-size:8px;letter-spacing:1.5px;white-space:nowrap;transition:.25s}
+.nirvo-dock button.active,.nirvo-dock button:hover,.nirvo-sound.enabled,.nirvo-tilt.enabled{background:linear-gradient(110deg,#5148e8,#078db4);color:white;box-shadow:0 0 22px #67e7f533}
+.nirvo-sound,.nirvo-share,.nirvo-tilt{position:absolute;z-index:9;top:105px;right:5%;border:1px solid #67e7f555;background:#080d1dcc;backdrop-filter:blur(14px);font-size:7px}
+.nirvo-share{top:auto;bottom:30px;right:5%;border-color:#5148e8}
+.nirvo-tilt{top:145px}
+#nirvoToast{position:absolute;z-index:40;left:50%;bottom:95px;transform:translate(-50%,12px);opacity:0;pointer-events:none;padding:12px 18px;border:1px solid #67e7f577;background:#0b1530ed;color:#e8f5ff;font-size:10px;letter-spacing:.5px;transition:.25s;backdrop-filter:blur(12px);white-space:nowrap}
+#nirvoToast.show{opacity:1;transform:translate(-50%,0)}
+#nirvoSave,#nirvoGift{border:1px solid #5148e8;color:#8fefff}
+@media(max-width:700px){
+ .nirvo-dock{bottom:calc(14px + env(safe-area-inset-bottom));width:calc(100% - 22px);justify-content:space-between;gap:0;padding:5px}
+ .nirvo-dock button{padding:11px 7px;font-size:6px;letter-spacing:.6px}
+ .nirvo-sound{top:78px;right:5%;padding:9px 12px}
+ .nirvo-tilt{top:116px;right:5%;padding:8px 11px}
+ .nirvo-share{display:none}
+ #nirvoToast{bottom:78px;max-width:90vw;white-space:normal;text-align:center}
+ .mobile-help{bottom:78px}
+}
+
+
+/* NIRVO flagship art direction — warm, restrained, architectural */
+:root{--gold:#b49a72;--gold-light:#e5d5bb;--ink:#171615;--muted:#c2b8a9}
+html,body,.world{background:#171615;color:#f1ece3}
+.world{background:radial-gradient(ellipse at 50% 44%,#39342e 0%,#1c1b19 65%,#121211 100%)}
+.grain{opacity:.035;mix-blend-mode:soft-light}
+.boot{background:#171615}.boot-logo{color:#e3d3b8}.boot p{color:#b49a72}.boot-line{background:#51483c}.boot-line i{background:#c6ad87}
+.topbar{background:linear-gradient(#171615e8,transparent);border-bottom-color:#d8c8ae20}
+.brand span,.top-center,.top-actions,.top-actions button{color:#e4d8c6}
+.scene-title:before{background:radial-gradient(ellipse at 42% 48%,rgba(23,22,21,.97) 0%,rgba(23,22,21,.8) 48%,rgba(23,22,21,.18) 80%,transparent 100%)}
+.scene-title p,.scene-title>span,.scene-caption,.zone-nav button i,.bottom-left,.bottom-right{color:#d6c5a8}
+.zone-nav button:before{background:#927c5e}.zone-nav button:hover,.zone-nav button.active{color:#f2e7d6}
+.explore-hint{color:#e2d6c5}.explore-hint b,.mouse-icon{color:#b49a72}
+.side-panel,.product-focus,.bag-panel,.menu-panel{background:linear-gradient(125deg,#272522f7,#171615fa);border-color:#b49a7244}
+.side-panel h2 em,.menu-panel h2 em{color:#e2d2b7}
+.panel-rule,.menu-divider{background:#b49a7244}
+.panel-products button{color:#eee5d8}.panel-products button span,.back-world,.product-focus .product-price,.menu-panel a{color:#c5a97c}
+.product-actions button,#nirvoSave{border-color:#8d795b;color:#e3d3b8}
+.complete-purchase,.add-to-cart{background:linear-gradient(110deg,#8c7655,#5c4d39);color:#fff8ec}
+.fullscreen-btn{color:#e2d2b7!important}
+.nirvo-dock,.nirvo-sound,.nirvo-share,.nirvo-tilt{display:none!important}
+@media(max-width:700px){.scene-title:before{background:radial-gradient(ellipse at 42% 45%,rgba(23,22,21,.98) 0%,rgba(23,22,21,.86) 55%,rgba(23,22,21,.18) 100%)}}
+
+/* Signature entrance and refined movement controls */
+.enter-mall{position:absolute;z-index:4;left:10.5%;top:59%;display:inline-flex;align-items:center;gap:32px;padding:15px 20px;border:1px solid #c6ad875c;background:linear-gradient(110deg,#9a805b,#66543d);color:#fff8ec;font-size:8px;letter-spacing:2.2px;box-shadow:0 12px 38px #0005;transition:transform .28s ease,filter .28s ease,opacity .35s ease}
+.enter-mall span{font-size:15px;line-height:8px}.enter-mall:hover{transform:translateY(-3px);filter:brightness(1.13)}
+.enter-mall.is-hidden{opacity:0;pointer-events:none;transform:translateY(8px)}
+@media(max-width:700px){.enter-mall{left:7%;top:48%;padding:13px 17px;gap:24px;font-size:7px}}
+@media(prefers-reduced-motion:reduce){.enter-mall{transition:none}}
