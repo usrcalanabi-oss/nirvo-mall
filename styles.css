@@ -87,3 +87,5 @@ html,body,.world{background:#171615;color:#f1ece3}
 .enter-mall.is-hidden{opacity:0;pointer-events:none;transform:translateY(8px)}
 @media(max-width:700px){.enter-mall{left:7%;top:48%;padding:13px 17px;gap:24px;font-size:7px}}
 @media(prefers-reduced-motion:reduce){.enter-mall{transition:none}}
+
+.order-review{border-top:1px solid #5269a455;padding-top:10px;margin-top:8px}.order-review select{width:100%;padding:10px;background:#101b38;color:#f4f7ff;border:1px solid #5269a455;font:11px 'DM Sans'}.order-line{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid #ffffff16;font-size:10px;color:#c8d4ed}.order-line strong{font-weight:500;color:#8fefff;text-align:right}.order-review>p:not(.eyebrow){font-size:10px;color:#aab8d7}
