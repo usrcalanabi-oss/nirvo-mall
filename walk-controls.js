@@ -9,7 +9,7 @@ export function initWalkControls({ THREE, camera, canvas, onZone = () => {} }) {
   .walk-tip{position:absolute;right:22px;bottom:calc(48px + env(safe-area-inset-bottom));padding:9px 12px;background:#171615b8;border:1px solid #b49a723d}
   .walk-hud.active .walk-joystick,.walk-hud.active .walk-look{display:block}
   .walk-hud.active .walk-status{opacity:.92}
-  @media(min-width:701px){.walk-hud.active .walk-tip{right:24px;bottom:25px}}
+  @media(min-width:701px){.walk-hud.active .walk-tip{right:24px;bottom:25px}.walk-hud.active .walk-joystick,.walk-hud.active .walk-look{display:none}}
   @media(max-width:700px){.walk-status{top:76px;font-size:7px}.walk-tip{right:14px;bottom:calc(42px + env(safe-area-inset-bottom));font-size:6px}.walk-joystick{width:112px;height:112px;left:16px}}
   `;
   document.head.appendChild(style);
