@@ -73,16 +73,16 @@ export function addHybridWorld(T, scene) {
   addBox(scene,32,.035,.045,warmLight,0,7.57,-19.72);
 
   // Vertical timber fins soften the long elevations and add a crafted, hotel-like finish.
-  const timber = new T.MeshStandardMaterial({color:0x5a4532,roughness:.68,metalness:.02});
+  const timber = new T.MeshStandardMaterial({color:0x89949a,roughness:.72,metalness:.02});
   for(const side of [-1,1]) {
-    for(let i=0;i<21;i++) {
-      const z=-17+i*1.22;
+    for(let i=0;i<13;i++) {
+      const z=-16+i*2.55;
       addBox(scene,.075,4.8,.13,timber,side*15.55,2.8,z);
     }
   }
 
   // A few warm pools of light make the marble floor and product displays read naturally.
-  for(const x of [-9,-3,3,9]) for(const z of [-13,-5,3]) addPoint(x,6.8,z,1.35,9);
+  for(const x of [-8,0,8]) addPoint(x,6.8,-5,0.85,8);
   function update() {}
   return { update };
 }
