@@ -29,7 +29,7 @@ export function mountReviewBoard({data=[]}={}) {
   const overlay=document.createElement('section');overlay.className='nr-overlay';overlay.innerHTML=`
     <header class="nr-head"><div class="nr-brand">NIRVO · CUSTOMER JOURNAL</div><button class="nr-close" type="button">CLOSE ×</button></header>
     <div class="nr-layout">
-      <section class="nr-panel"><h2>Share your experience.</h2><p class="nr-sub">Tell the NIRVO community about your purchase. Add a product photo and a few honest words.</p>
+      <section class="nr-panel"><h2>Share your experience.</h2><p class="nr-sub">Tell the NIRVO community about your purchase. Write an honest review; a photo can be previewed on your device but cannot yet be shared publicly.</p>
         <form class="nr-form" id="nrForm">
           <label>Your display name<input name="name" maxlength="40" required placeholder="Name shown with your review"></label>
           <label>Product<select name="product" required><option value="">Choose a product</option></select></label>
