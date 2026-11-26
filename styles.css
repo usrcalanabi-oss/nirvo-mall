@@ -80,3 +80,10 @@ html,body,.world{background:#171615;color:#f1ece3}
 .fullscreen-btn{color:#e2d2b7!important}
 .nirvo-dock,.nirvo-sound,.nirvo-share,.nirvo-tilt{display:none!important}
 @media(max-width:700px){.scene-title:before{background:radial-gradient(ellipse at 42% 45%,rgba(23,22,21,.98) 0%,rgba(23,22,21,.86) 55%,rgba(23,22,21,.18) 100%)}}
+
+/* Signature entrance and refined movement controls */
+.enter-mall{position:absolute;z-index:4;left:10.5%;top:59%;display:inline-flex;align-items:center;gap:32px;padding:15px 20px;border:1px solid #c6ad875c;background:linear-gradient(110deg,#9a805b,#66543d);color:#fff8ec;font-size:8px;letter-spacing:2.2px;box-shadow:0 12px 38px #0005;transition:transform .28s ease,filter .28s ease,opacity .35s ease}
+.enter-mall span{font-size:15px;line-height:8px}.enter-mall:hover{transform:translateY(-3px);filter:brightness(1.13)}
+.enter-mall.is-hidden{opacity:0;pointer-events:none;transform:translateY(8px)}
+@media(max-width:700px){.enter-mall{left:7%;top:48%;padding:13px 17px;gap:24px;font-size:7px}}
+@media(prefers-reduced-motion:reduce){.enter-mall{transition:none}}
