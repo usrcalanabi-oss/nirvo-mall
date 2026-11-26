@@ -34,8 +34,11 @@ export function initWalkControls({ THREE, camera, canvas, onZone = () => {} }) {
   window.addEventListener('pointermove',e=>{if(state.lookPointer!=='mouse'||!state.enabled)return;const dx=e.clientX-state.lastX,dy=e.clientY-state.lastY;state.lastX=e.clientX;state.lastY=e.clientY;state.yaw-=dx*.004;state.pitch=Math.max(-.72,Math.min(.58,state.pitch-dy*.003))});
   window.addEventListener('pointerup',()=>{if(state.lookPointer==='mouse')state.lookPointer=null});
   function enable(){state.enabled=true;state.x=0;state.z=4.2;state.yaw=0;state.pitch=-.04;state.zone=-1;hud.classList.add('active');hud.querySelector('.walk-status').textContent='WALK MODE · GRAND ATRIUM';}
-  function disable(){state.enabled=false;state.paused=false;state.keys.clear();state.moveX=state.moveY=0;hud.classList.remove('active')}\n  function pause(){if(!state.enabled)return;state.enabled=false;state.paused=true;state.keys.clear();state.moveX=state.moveY=0;hud.classList.remove('active')}\n  function resume(){if(!state.paused)return;state.paused=false;state.enabled=true;hud.classList.add('active')}
-  function travelTo(i){if(i<0||i>4)return;state.x=centers[i];state.z=-1.2;state.yaw=0;state.pitch=-.04}\n  function returnToAtrium(){state.x=0;state.z=4.2;state.yaw=0;state.pitch=-.04;state.zone=-1;}
+  function disable(){state.enabled=false;state.paused=false;state.keys.clear();state.moveX=state.moveY=0;hud.classList.remove('active')}
+  function pause(){if(!state.enabled)return;state.enabled=false;state.paused=true;state.keys.clear();state.moveX=state.moveY=0;hud.classList.remove('active')}
+  function resume(){if(!state.paused)return;state.paused=false;state.enabled=true;hud.classList.add('active')}
+  function travelTo(i){if(i<0||i>4)return;state.x=centers[i];state.z=-1.2;state.yaw=0;state.pitch=-.04}
+  function returnToAtrium(){state.x=0;state.z=4.2;state.yaw=0;state.pitch=-.04;state.zone=-1;}
   function update(dt){
     if(!state.enabled)return;
     const k=state.keys,forward=(k.has('KeyW')||k.has('ArrowUp')?1:0)-(k.has('KeyS')||k.has('ArrowDown')?1:0)+state.moveY;
