@@ -23,19 +23,19 @@ export function createProductModel(T, category, variant=0) {
    else {cyl(.19,.22,.55,glass,0,.42,0);cyl(.21,.21,.09,gold,0,.74,0);cyl(.07,.07,.22,dark,0,.88,0);cyl(.12,.12,.09,gold,0,1.03,0)}
    add(new T.BoxGeometry(.23,.18,.012),ivory,0,.38,.2);
  }else if(category==='watches'){
-   add(new T.BoxGeometry(.25,.72,.09,dark),0,.55,0);
-   add(new T.BoxGeometry(.32,.42,.12,gold),0,.58,.015);
+   add(new T.BoxGeometry(.25,.72,.09),dark,0,.55,0);
+   add(new T.BoxGeometry(.32,.42,.12),gold,0,.58,.015);
    add(new T.CylinderGeometry(.205,.205,.07,64),silver,0,.61,.09,Math.PI/2);
    add(new T.CylinderGeometry(.17,.17,.018,64),dark,0,.61,.132,Math.PI/2);
    add(new T.CircleGeometry(.145,48),mat(variant===2?'#172331':'#d0c4ad',.25,.24),0,.61,.145,0,0,0);
    for(let j=0;j<12;j++){const a=j*Math.PI/6;add(new T.BoxGeometry(.012,.035,.012),gold,Math.sin(a)*.115,.61+Math.cos(a)*.115,.16)}
    add(new T.BoxGeometry(.008,.09,.008),ivory,0,.65,.17);add(new T.BoxGeometry(.007,.065,.008),gold,.025,.59,.175);
-   for(let y of [.12,1.02]){add(new T.BoxGeometry(.22,.25,.08,dark),0,y,0);for(let j=0;j<3;j++)add(new T.BoxGeometry(.18,.018,.09),silver,0,y-.06+j*.06,0)}
+   for(let y of [.12,1.02]){add(new T.BoxGeometry(.22,.25,.08),dark,0,y,0);for(let j=0;j<3;j++)add(new T.BoxGeometry(.18,.018,.09),silver,0,y-.06+j*.06,0)}
    cyl(.035,.035,.08,gold,.2,.61,.08,16);
  }else{
    const body=variant===1?new T.CylinderGeometry(.24,.32,.66,6):new T.BoxGeometry(.48,.68,.28);
    add(body,glass,0,.47,0);add(new T.BoxGeometry(.32,.23,.012),gold,0,.47,.15);add(new T.BoxGeometry(.26,.16,.014),ivory,0,.47,.16);
-   add(new T.CylinderGeometry(.12,.12,.12,gold,0,.86,0));add(new T.CylinderGeometry(.075,.075,.22,gold,0,1.02,0));add(new T.BoxGeometry(.18,.08,.16,dark),0,1.17,0);
+   cyl(.12,.12,.12,gold,0,.86,0);cyl(.075,.075,.22,gold,0,1.02,0);add(new T.BoxGeometry(.18,.08,.16),dark,0,1.17,0);
    for(let side of [-1,1])add(new T.BoxGeometry(.025,.42,.025),gold,side*.255,.46,0);
  }
  return root;
