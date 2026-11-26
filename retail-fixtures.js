@@ -118,14 +118,14 @@ export function addRetailFixtures(T,s,b,cy){
      // Slim metal hook and triangular wooden hanger.
      const hookCurve=new T.CatmullRomCurve3([new T.Vector3(0,3.08,0),new T.Vector3(0,3.2,.015),new T.Vector3(.075,3.24,.015),new T.Vector3(.11,3.18,.015)]);
      g.add(new T.Mesh(new T.TubeGeometry(hookCurve,14,.012,6,false),brass));
-     const hangerPts=[new T.Vector3(-.19,2.98,0),new T.Vector3(0,3.08,0),new T.Vector3(.19,2.98,0)];
+     const hangerPts=[new T.Vector3(-.11,2.98,0),new T.Vector3(0,3.08,0),new T.Vector3(.11,2.98,0)];
      const hangerGeo=new T.BufferGeometry().setFromPoints(hangerPts);
      g.add(new T.Line(hangerGeo,new T.LineBasicMaterial({color:0xc4a879})));
      const garmentShape=new T.Shape();
-     garmentShape.moveTo(-.18,2.96);garmentShape.lineTo(-.36,2.78);garmentShape.lineTo(-.28,2.55);
-     garmentShape.lineTo(-.2,2.61);garmentShape.lineTo(-.17,1.98);garmentShape.quadraticCurveTo(0,1.91,.17,1.98);
-     garmentShape.lineTo(.2,2.61);garmentShape.lineTo(.28,2.55);garmentShape.lineTo(.36,2.78);
-     garmentShape.lineTo(.18,2.96);garmentShape.lineTo(.08,2.88);garmentShape.lineTo(-.08,2.88);garmentShape.closePath();
+     garmentShape.moveTo(-.12,2.96);garmentShape.lineTo(-.145,2.78);garmentShape.lineTo(-.13,2.55);
+     garmentShape.lineTo(-.105,2.61);garmentShape.lineTo(-.10,1.98);garmentShape.quadraticCurveTo(0,1.94,.10,1.98);
+     garmentShape.lineTo(.105,2.61);garmentShape.lineTo(.13,2.55);garmentShape.lineTo(.145,2.78);
+     garmentShape.lineTo(.12,2.96);garmentShape.lineTo(.055,2.88);garmentShape.lineTo(-.055,2.88);garmentShape.closePath();
      const garment=new T.Mesh(new T.ShapeGeometry(garmentShape),clothMats[(i+(reverse?3:0))%clothMats.length]);
      garment.position.z=.035;garment.castShadow=true;g.add(garment);
      // Fine seams and a small label make each hanging piece read as a separate garment.
@@ -138,7 +138,7 @@ export function addRetailFixtures(T,s,b,cy){
  }
  {const x=bayCenters[0];bayFloor(x,4.65,new T.MeshStandardMaterial({color:'#aeb5b7',roughness:.88}));wallPanel(x,4.35,new T.MeshStandardMaterial({color:'#9da6aa',roughness:.82}));
    // Two complete hanging rails show the range like a premium ready-to-wear atelier.
-   hangerRail(x,-9.05,12,false);hangerRail(x,-5.65,10,true);
+   hangerRail(x,-9.05,12,false);hangerRail(x,-5.65,12,true);
    // A low folded-garment island and a pair of styled mannequins finish the boutique.
    box(s,3.3,.12,.72,pale,x,.62,-3.9);box(s,3.3,.045,.76,brass,x,.7,-3.9);
    for(let j=0;j<3;j++){box(s,.78,.055,.48,[garment,pale,inner][j],x-1.05+j*1.05,.83,-3.9);box(s,.78,.035,.48,stone,x-1.05+j*1.05,.89,-3.9)}
