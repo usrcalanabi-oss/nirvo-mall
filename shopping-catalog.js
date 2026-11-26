@@ -16,7 +16,7 @@ export function mountProductCatalog({ data, onSelect }) {
   .catalog-open{display:block;width:100%;margin-top:12px;padding:12px;background:#b9a17b;color:#171513;border:0;font-size:9px;letter-spacing:1.5px}
   .catalog-empty{color:#aaa;padding:30px 0}.catalog-card:active{transform:scale(.985)}.browse-all-products{width:100%;margin:12px 0 18px;padding:14px;border:1px solid #b69b70;background:#b69b70;color:#171513;font-size:9px;letter-spacing:1.7px}.browse-all-products:active{opacity:.82}
   @media(max-width:850px){.catalog-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.catalog-overlay{padding:16px}.catalog-art{height:130px}}
-  @media(max-width:390px){.catalog-grid{gap:8px}.catalog-meta{padding:9px}.catalog-meta strong{font-size:14px}}
+  @media(max-width:390px){.catalog-grid{gap:8px}.catalog-meta{padding:9px}.catalog-meta strong{font-size:14px}}@media(max-width:700px){.top-actions #allProductsBtn{display:none}}
   `;
   document.head.appendChild(style);
   const root=document.createElement('section');root.className='catalog-overlay';root.id='productCatalog';
