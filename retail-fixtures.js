@@ -95,8 +95,55 @@ export function addRetailFixtures(T,s,b,cy){
  function bayFloor(x,w,mat){box(s,w,.035,9,mat,x,-.205,-7.1);box(s,w,.025,.06,brass,x,-.18,-11.55);box(s,w,.025,.06,brass,x,-.18,-2.65)}
  function wallPanel(x,w,mat){box(s,w,4.2,.22,mat,x,2,-11.15);box(s,w+.12,.07,.28,brass,x,4.14,-11.12)}
  function mannequin(x,z,scale=1){const g=new T.Group();g.position.set(x,0,z);s.add(g);tube(g,.22,.27,.12,brass,0,.08,0);tube(g,.12,.16,.95,garment,0,.65,0);tube(g,.07,.11,.5,garment,0,1.32,0);tube(g,.09,.09,.13,pale,0,1.65,0);for(let side of [-1,1]){box(g,.09,.75,.1,garment,side*.24,1.05,0);box(g,.11,.78,.12,garment,side*.1,-.28,0)}g.scale.setScalar(scale);return g}
- // 01 Fashion — warm atelier, timber rails, garment forms and soft fitting-room light.
- {const x=bayCenters[0];bayFloor(x,4.65,new T.MeshStandardMaterial({color:'#aeb5b7',roughness:.88}));wallPanel(x,4.35,new T.MeshStandardMaterial({color:'#9da6aa',roughness:.82}));for(let side of [-1,1]){box(s,.12,3.5,.16,brass,x+side*1.88,1.8,-7.2);box(s,1.05,.09,.1,brass,x+side*1.35,3.42,-7.2)}box(s,3.3,.12,.72,pale,x,.62,-5.3);box(s,3.3,.045,.76,brass,x,.7,-5.3);box(s,2.8,.08,.16,brass,x,2.95,-7.1);for(let j=0;j<5;j++){let xx=x-1.15+j*.57;box(s,.035,.9,.035,garment,xx,2.35,-7.1);box(s,.24,.52,.08,[garment,pale,inner][j%3],xx,2.1,-7.1)}mannequin(x-1.25,-4.1,.9);mannequin(x+1.15,-4.1,.9);ceilingPendant(x, -5.2)}
+ // 01 Fashion — a real boutique rail presentation with individual hangers, spaced garments and folded-stock shelves.
+ function hangerRail(cx,z,count=11,reverse=false){
+   const rail=new T.Group();rail.position.set(cx,0,z);s.add(rail);
+   box(rail,3.55,.075,.075,brass,0,3.22,0);
+   for(let side of [-1,1]){
+     box(rail,.07,3.05,.07,metal,side*1.72,1.65,0);
+     box(rail,.28,.07,.28,brass,side*1.72,.12,0);
+     box(rail,.12,.12,.12,brass,side*1.72,3.18,0);
+   }
+   const clothMats=[
+     new T.MeshStandardMaterial({color:'#d9d0c1',roughness:.92,side:T.DoubleSide}),
+     new T.MeshStandardMaterial({color:'#24272a',roughness:.9,side:T.DoubleSide}),
+     new T.MeshStandardMaterial({color:'#7d6957',roughness:.94,side:T.DoubleSide}),
+     new T.MeshStandardMaterial({color:'#a7b0b2',roughness:.9,side:T.DoubleSide}),
+     new T.MeshStandardMaterial({color:'#34465a',roughness:.92,side:T.DoubleSide}),
+     new T.MeshStandardMaterial({color:'#8d3437',roughness:.92,side:T.DoubleSide}),
+     new T.MeshStandardMaterial({color:'#c0ad8e',roughness:.94,side:T.DoubleSide})
+   ];
+   for(let i=0;i<count;i++){
+     const x=-1.42+i*(2.84/(count-1)),g=new T.Group();g.position.set(x,0,0);rail.add(g);
+     // Slim metal hook and triangular wooden hanger.
+     const hookCurve=new T.CatmullRomCurve3([new T.Vector3(0,3.08,0),new T.Vector3(0,3.2,.015),new T.Vector3(.075,3.24,.015),new T.Vector3(.11,3.18,.015)]);
+     g.add(new T.Mesh(new T.TubeGeometry(hookCurve,14,.012,6,false),brass));
+     const hangerPts=[new T.Vector3(-.19,2.98,0),new T.Vector3(0,3.08,0),new T.Vector3(.19,2.98,0)];
+     const hangerGeo=new T.BufferGeometry().setFromPoints(hangerPts);
+     g.add(new T.Line(hangerGeo,new T.LineBasicMaterial({color:0xc4a879})));
+     const garmentShape=new T.Shape();
+     garmentShape.moveTo(-.18,2.96);garmentShape.lineTo(-.36,2.78);garmentShape.lineTo(-.28,2.55);
+     garmentShape.lineTo(-.2,2.61);garmentShape.lineTo(-.17,1.98);garmentShape.quadraticCurveTo(0,1.91,.17,1.98);
+     garmentShape.lineTo(.2,2.61);garmentShape.lineTo(.28,2.55);garmentShape.lineTo(.36,2.78);
+     garmentShape.lineTo(.18,2.96);garmentShape.lineTo(.08,2.88);garmentShape.lineTo(-.08,2.88);garmentShape.closePath();
+     const garment=new T.Mesh(new T.ShapeGeometry(garmentShape),clothMats[(i+(reverse?3:0))%clothMats.length]);
+     garment.position.z=.035;garment.castShadow=true;g.add(garment);
+     // Fine seams and a small label make each hanging piece read as a separate garment.
+     box(g,.012,.58,.009,brass,0,2.37,.047);
+     box(g,.075,.045,.012,inner,0,2.82,.05);
+   }
+   box(rail,3.7,.08,.22,stone,0,.12,0);
+   box(rail,3.72,.035,.24,brass,0,.18,0);
+   return rail;
+ }
+ {const x=bayCenters[0];bayFloor(x,4.65,new T.MeshStandardMaterial({color:'#aeb5b7',roughness:.88}));wallPanel(x,4.35,new T.MeshStandardMaterial({color:'#9da6aa',roughness:.82}));
+   // Two complete hanging rails show the range like a premium ready-to-wear atelier.
+   hangerRail(x,-9.05,12,false);hangerRail(x,-5.65,10,true);
+   // A low folded-garment island and a pair of styled mannequins finish the boutique.
+   box(s,3.3,.12,.72,pale,x,.62,-3.9);box(s,3.3,.045,.76,brass,x,.7,-3.9);
+   for(let j=0;j<3;j++){box(s,.78,.055,.48,[garment,pale,inner][j],x-1.05+j*1.05,.83,-3.9);box(s,.78,.035,.48,stone,x-1.05+j*1.05,.89,-3.9)}
+   mannequin(x-1.28,-2.55,.86);mannequin(x+1.22,-2.55,.86);ceilingPendant(x,-4.6)
+ }
  // 02 Jewellery — dark velvet salon, glass vitrines, fine brass frames and focused points of light.
  {const x=bayCenters[1];bayFloor(x,4.65,new T.MeshStandardMaterial({color:'#282521',roughness:.32}));wallPanel(x,4.35,new T.MeshStandardMaterial({color:'#292622',roughness:.48}));for(let j=0;j<3;j++){let xx=x-1.35+j*1.35;vitrine(xx,-6.1,1.05);let beam=new T.SpotLight(0xffe5bd,10,5,Math.PI/8,.65);beam.position.set(xx,3.8,-5.9);beam.target.position.set(xx,1.2,-6.1);s.add(beam,beam.target)}box(s,3.4,.18,1.0,brass,x,.35,-9.1);box(s,3.25,.65,.84,inner,x,.76,-9.1);box(s,3.4,.045,1.0,glass,x,1.12,-9.1)}
  // 03 Beauty — pale stone apothecary with a long consultation counter and backlit product niches.
