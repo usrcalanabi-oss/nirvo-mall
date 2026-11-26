@@ -14,8 +14,8 @@ function completePurchase(){
  if(!cart.length){alert('Your trolley is empty. Add a product first.');return}
  const name=$('customerName').value.trim(),phone=$('customerPhone').value.trim(),address=$('customerAddress').value.trim();
  if(!name||!phone||!address){alert('Please enter your name, phone number and delivery address.');return}
- const lines=cart.map(x=>'• '+x.name+' — Qty: '+x.qty+' — Price: Please confirm').join('\\n');
- const msg=['Hello NIRVO, I would like to place a purchase enquiry.','','Name: '+name,'Phone: '+phone,'Delivery address: '+address,'','Selected products:',lines,'','Please confirm availability, final prices and delivery details.'].join('\\n');
+ const lines=cart.map(x=>'• '+x.name+' — Qty: '+x.qty+' — Price: Please confirm').join('\n');
+ const msg=['Hello NIRVO, I would like to place a purchase enquiry.','','Name: '+name,'Phone: '+phone,'Delivery address: '+address,'','Selected products:',lines,'','Please confirm availability, final prices and delivery details.'].join('\n');
  window.open('https://wa.me/'+WA_NUMBER+'?text='+encodeURIComponent(msg),'_blank','noopener');
 }
 let dest=new T.Vector3(0,4.5,15),look=new T.Vector3(0,2,-5);
